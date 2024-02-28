@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <!-- Material Icons CDN -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="icon" type="image/x-icon" href="logo.png">
+</head>
+
+<body>
+    <div class="container">
+        <aside>
+            <div class="top">
+                <div class="logo">
+                    <img src="logo.png" alt="">
+                    <h2>AD<span class="danger">MIN</span></h2>
+                </div>
+                <div class="close" id="close-btn">
+                    <span class="material-icons-sharp">close</span>
+                </div>
+            </div>
+            <div class="sidebar">
+                <a href="#" id="dashboard" class="active">
+                    <span class="material-icons-sharp">grid_view</span>
+                    <h3>Dashboard</h3>
+                </a>
+                <a href="/addBlog" id="addProductLink">
+                    <span class="material-icons-sharp">add</span>
+                    <h3>Add Blog</h3>
+                </a>
+                <a href="/">
+                    <span class="material-icons-sharp">home</span>
+                    <h3>Home</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">person_outline</span>
+                    <h3>Users</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">insights</span>
+                    <h3>Analytics</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">mail_outline</span>
+                    <h3>Messages</h3>
+                    <span class="message-count">26</span>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">report</span>
+                    <h3>Report</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">settings</span>
+                    <h3>Settings</h3>
+                </a>
+                <a href="/logout">
+                    <span class="material-icons-sharp">logout</span>
+                    <h3>Logout</h3>
+                </a>
+            </div>
+        </aside>
+
+        <main>
+            <h1>Dashboard</h1>
+            <div class="form">
+                <h2>Add a product:</h2>
+                <form action="" class="myForm">
+                    <input type="text" class="productName" placeholder="Enter Product Name">
+                    <input type="text" class="productQuantity" placeholder="Enter Product Quantity">
+                    <input type="text" class="price" placeholder="Enter Price">
+                    <button type="submit" class="add">Add Product</button>
+                </form>
+            </div>
+            <h2>Requested Blogs:</h2>
+            <section class="blogs-section">
+    {{#each latestBlog as |blog|}}
+        {{#unless blog.approved}}
+            <div class="blog-card">
+                <img src="{{blog.imageURL}}" class="blog-image" alt="">
+                <h1 class="blog-title">Title: {{blog.title}}</h1>
+                <div class="desc-container"><p class="blog-overview">Description: {{blog.desc}}</p></div>
+                <p class="blog-overview">Author: {{blog.user.username}}</p>
+                <a href="/approveBlog/{{blog.id}}" class="approve-btn">Approve</a>
+                <a href="/rejectBlog/{{blog.id}}" class="reject-btn">Reject</a>
+            </div>
+        {{/unless}}
+    {{/each}}
+</section>
+
+
+
+
+        </main>
+
+
+        <div class="right">
+            <div class="top">
+                <button id="menu-btn">
+                    <span class="material-icons-sharp">menu</span>
+                </button>
+                
+                <div class="profile">
+                    <div class="info">
+                        <p>Hey, <b>Admin</b></p>
+                        <small class="text-muted">Admin</small>
+                    </div>
+                    <div class="profile-photo">
+                        <img src="profile-1.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <div class="recent-updates">
+                <h2>Recent Updates</h2>
+                <div class="updates">
+                    <div class="update">
+                        <div class="profile-photo">
+                            <img src="profile-2.jpg" alt="">
+                        </div>
+                        <div class="message">
+                            <p><b>Roronoa Zoro</b> added a Blog.</p>
+                            <small class="text-muted">2 Minutes Ago</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="updates">
+                    <div class="update">
+                        <div class="profile-photo">
+                            <img src="profile-3.jpg" alt="">
+                        </div>
+                        <div class="message">
+                            <p><b>Hayley stone</b> added a Blog.</p>
+                            <small class="text-muted">3 Minutes Ago</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="updates">
+                    <div class="update">
+                        <div class="profile-photo">
+                            <img src="profile-4.jpg" alt="">
+                        </div>
+                        <div class="message">
+                            <p><b>Elizabeth lynch</b> added a Blog.</p>
+                            <small class="text-muted">4 Minutes Ago</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="add-products" id="addProductLink">
+                <div class="item add-products">
+                    <span class="material-icons-sharp">add</span>
+                    <h3><a href="/addblog">Add Blog</a></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="popup" id="popup">
+
+    </div>
+    </div>
+</body>
+
+</html>

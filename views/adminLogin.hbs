@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;1,600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/adminLogin.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <img src="logo.png" class="logo" alt="">
+        <ul class="links-container">
+            <li class="link-item"><a href="/register" class="link">Register</a></li>
+            <li class="link-item"><a href="/login" class="link">User Login</a></li>
+            <li class="link-item"><a href="/" class="link">Home</a></li>
+        </ul>
+    </nav>
+    <form action="/admin" method="post">
+        <h1>Welcome Admin,</h1>
+        <h3>Please enter your credentials to login</h3>
+        <input type="text" name="username" placeholder="Enter Username:">
+        <input type="text" name="password" placeholder="Enter Password:">
+        <button type="submit">Login</button>
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Blog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;1,600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/addBlog.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <img src="logo.png" class="logo" alt="">
+        <ul class="links-container">
+            <li class="link-item"><a href="/" class="link">home</a></li>
+            <li class="link-item"><a href="/myBlogs" class="link">My Blogs</a></li>
+            <li class="link-item"><a href="/logout" class="link">Logout</a></li>
+            <li class="link-item"><a href="/admin" class="link">Admin</a></li>
+        </ul>
+    </nav>
+
+    <div class="form">
+        <h2>Add a Blog:</h2>
+        <form action="/addBlog" method="post" class="myForm" enctype="multipart/form-data">
+            <input type="text" class="productQuantity" placeholder="Enter Blog Title" name="title">
+            <textarea name="desc" id="" cols="30" rows="10" placeholder="Enter Blog Description"></textarea>
+            <input type="file" class="productName" placeholder="Upload blog image" name="imageURL">
+            <button type="submit" class="add">Add Blog</button>
+        </form>
+    </div>
+</body>
+
+</html>
