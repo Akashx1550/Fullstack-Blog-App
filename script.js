@@ -21,12 +21,18 @@ const port = process.env.PORT || 3334;
 
 app.use('/', require('./routes/blog'));
 
-mongoose.connect('mongodb://127.0.0.1:27017/G17Session').then(() => {
-    app.listen(port, () => {
-        console.log(`Server started on ${port}`);
-    })
-})
+// mongoose.connect('mongodb://127.0.0.1:27017/G17Session').then(() => {
+//     app.listen(port, () => {
+//         console.log(`Server started on ${port}`);
+//     })
+// })
 
-// app.listen(port, () => {
-//        console.log(`Server started on ${port}`);
-//    })
+mongoose.connect('mongodb+srv://akashx1550:gD6z9GxH9MudGUVe@cluster0.4kkprau.mongodb.net/')
+    .then(() => {
+        app.listen(port, () => {
+            console.log(`Server started on ${port}`);
+        });
+    })
+    .catch((err) => {
+        console.error('Error connecting to MongoDB:', err);
+    });
