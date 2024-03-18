@@ -15,7 +15,7 @@ app.use(express.json());    //To parse json data
 
 app.set('view engine', 'hbs');
 
-const port = 3334;
+const port = process.env.PORT || 3334;
 
 app.use('/', require('./routes/blog'));
 
