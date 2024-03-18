@@ -8,7 +8,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use("/uploads" , express.static(path.join(__dirname , 'uploads')));
 
 app.use(session({
-    secret: 'secret'
+    secret: 'secret',
+    resave: false,
+  saveUninitialized: false
 }))
 app.use(express.urlencoded({ extended: true }));    //To parse url encoded data
 app.use(express.json());    //To parse json data
