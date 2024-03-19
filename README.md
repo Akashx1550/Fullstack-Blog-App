@@ -6,6 +6,7 @@ This Node.js web application is built using Express and MongoDB with Mongoose, p
 
 - User registration and login functionality
 - Email verification for new user accounts
+- Handlebars for SSR
 - Session management for logged-in users
 - CRUD functionality for creating, reading, updating, and deleting blogs
 - Admin privileges for content curation
@@ -16,6 +17,7 @@ This Node.js web application is built using Express and MongoDB with Mongoose, p
 
 - Node.js
 - Express
+- Handlebars
 - MongoDB with Mongoose
 - Nodemailer
 - Crypto (for token encryption)
