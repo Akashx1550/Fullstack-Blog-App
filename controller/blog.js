@@ -84,7 +84,8 @@ module.exports.postRegister = async (req, res) => {
     let newUser = new User({ username, email, password, verificationToken: generateVerificationToken() }); //If both keys in schema are different then we have to separely pass key and values and if same name then store only values directly
     await newUser.save();   //Asynchronous
     // res.send("User successfully registered")
-    const verificationLink = `http://localhost:3334/verify?token=${newUser.verificationToken}`;
+    // const verificationLink = `http://localhost:3334/verify?token=${newUser.verificationToken}`;
+    const verificationLink = `https://fullstack-blog-app-v3k0.onrender.com/verify?token=${newUser.verificationToken}`;
 
     const mailOptions = {
         from: 'akashx1550@gmai.com',
@@ -101,7 +102,14 @@ module.exports.postRegister = async (req, res) => {
         }
     });
 
-    res.send("User successfully registered");
+    // Send response with registration message and login page link
+    const registrationMessage = "User successfully registered. Please check your mail and verify your account";
+    const loginPageLink = "https://fullstack-blog-app-v3k0.onrender.com/login"; // Replace with your actual login page URL
+    const responseMessage = `${registrationMessage}.Go to <a href="${loginPageLink}">login</a> page.`;
+
+    res.send(responseMessage);
+
+    // res.send("User successfully registered");
 };
 
 module.exports.getVerification = async (req, res) => {
