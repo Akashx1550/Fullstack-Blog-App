@@ -1,6 +1,13 @@
 const User = require('../model/user');      //await Save, find,findOne -> return in form of array , findByIdAndUpdate
 const Admin = require('../model/admin');
 const Blog = require('../model/blog');
+const cloudinary = require('cloudinary');
+cloudinary.config({
+    cloud_name: 'drfam5mgv',
+    api_key: '967581581334764',
+    api_secret: 'Xm4W0eQZOaX6nVDmIZuB__w1BGo'
+});
+
 
 const { transporter, generateVerificationToken } = require('../Utils/nodemailer');
 
@@ -35,7 +42,7 @@ module.exports.checkAdminForBlog = (req, res, next) => {
 
 module.exports.getHome = async (req, res) => {
     const latestBlog = await Blog.find().populate('user').exec();
-    console.log(latestBlog)
+    // console.log(latestBlog)
     res.render('home', { latestBlog, isLoggedIn: req.session.isLoggedIn, isLoggedInAdmin: req.session.isLoggedInAdmin });
 };
 
@@ -123,7 +130,7 @@ module.exports.getVerification = async (req, res) => {
 module.exports.getAdmin = async (req, res) => {
 
     const latestBlog = await Blog.find().populate('user').exec();
-    console.log(latestBlog);
+    // console.log(latestBlog);
     res.render('admin', { latestBlog });
 };
 
@@ -186,14 +193,21 @@ module.exports.postAddBlog = async (req, res) => {
         console.log(req.file);
         // console.log(imageURL);
 
-        let newBlog = new Blog({ imageURL: path, title, desc, user: req.session.user._id, approved: false });
-        await newBlog.save();
+        try {
+            let result = await cloudinary.uploader.upload(path, { public_id: "olympic_flag" });
+            console.log(result);
 
-        const user = await User.findById(req.session.user._id);
-        user.blog.push(newBlog._id);
-        await user.save();
+            let newBlog = new Blog({ imageURL: result.url, title, desc, user: req.session.user._id, approved: false });
+            await newBlog.save();
 
-        res.redirect('/');
+            const user = await User.findById(req.session.user._id);
+            user.blog.push(newBlog._id);
+            await user.save();
+
+            res.redirect('/');
+        } catch (error) {
+            console.error("Error uploading image:", error);
+        }
     } else if (req.session.admin) {
 
         const adminUser = await User.findOne({ email: "akashx1550@gmail.com" });
@@ -203,15 +217,24 @@ module.exports.postAddBlog = async (req, res) => {
 
         const { title, desc } = req.body;
         const { path } = req.file;
-        let newBlog = new Blog({ imageURL: path, title, desc, user: adminUser._id, approved: true });
-        await newBlog.save();
 
-        adminUser.blog.push(newBlog._id);
-        await adminUser.save();
+        try {
+            let result = await cloudinary.uploader.upload(path, { public_id: "olympic_flag" });
+            console.log(result);
 
-        console.log(newBlog);
+            let newBlog = new Blog({ imageURL: result.url, title, desc, user: adminUser._id, approved: true });
+            await newBlog.save();
 
-        res.redirect('/');
+            adminUser.blog.push(newBlog._id);
+            await adminUser.save();
+
+            // console.log(newBlog);
+
+            res.redirect('/');
+        } catch (error) {
+            console.error("Error uploading image:", error);
+        }
+
     }
 
     else {
@@ -222,7 +245,7 @@ module.exports.postAddBlog = async (req, res) => {
 
 module.exports.getMyBlogs = async (req, res) => {
     const user = await User.findById(req.session.user._id).populate('blog');
-    console.log(user);
+    // console.log(user);
 
     res.render('myBlog', { blogs: user.blog })
 };
@@ -244,7 +267,7 @@ module.exports.getReadMore = async (req, res) => {
     // console.log(blogId);
 
     const blog = await Blog.findOne({ _id: blogId }).populate('user');
-    console.log(blog)
+    // console.log(blog)
     if (!blog) {
         return res.status(404).send("Blog not found");
     }
